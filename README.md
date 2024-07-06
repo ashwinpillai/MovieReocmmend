@@ -16,7 +16,7 @@ This project implements a movie recommendation system using Flask, integrating m
    ```bash
    git clone <repository_url>
    cd <repository_directory>
-2.##Install Dependencies
+2.**Install Dependencies **
 
 Ensure you have Python 3.x and pip installed.
 

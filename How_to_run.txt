@@ -1,0 +1,25 @@
+Movie Recommendation System
+This project implements a movie recommendation
+ system using Flask, SQLite database, and machine learning techniques. 
+ It allows users to sign up, log in, and receive movie recommendations based on their preferences. 
+ The system also provides movie details, trailers, and user reviews fetched from external APIs 
+ and websites.
+
+Requirements
+Python 3.x
+Flask
+Pandas
+NumPy
+scikit-learn
+BeautifulSoup4
+requests
+SQLite3
+
+Step 1:-OPEN THE FOLDER 
+There is already a venv file please delete it 
+in cmd --
+python -m venv venv
+
+venv/scripts/activate 
+if any error
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser

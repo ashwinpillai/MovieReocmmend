@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Recommendation System</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Average&display=swap" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Auto Complete -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+  
+  <script type="text/javascript">
+    var films = {{suggestions|tojson}};
+  </script>
+ <style>
+    /* Existing CSS for .button-24 */
+    .button-24 {
+      /* Existing styles */
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 75px;
+      height: 35px;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      position: fixed; /* Change position to fixed */
+      top: 20px; /* Adjust top position */
+      right: 20px; /* Adjust right position */
+      overflow: hidden;
+      transition-duration: .3s;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+      background-color: rgb(255, 65, 65);
+  }
+
+    /* plus sign */
+    .button-24 .sign {
+        width: 100%;
+        transition-duration: .3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .button-24 .sign svg {
+        width: 17px;
+    }
+
+    .button-24 .sign svg path {
+        fill: white;
+    }
+    /* text */
+    .button-24 .text {
+        position: absolute;
+        right: 0%;
+        width: 0%;
+        opacity: 0.5;
+        color: white;
+        font-size: 1.2em;
+        font-weight: 600;
+        transition-duration: .3s;
+    }
+    /* hover effect on button width */
+    .button-24:hover {
+        width: 125px;
+        border-radius: 40px;
+        transition-duration: .3s;
+    }
+
+    .button-24:hover .sign {
+        width: 30%;
+        transition-duration: .3s;
+        padding-left: 20px;
+    }
+    /* hover effect button's text */
+    .button-24:hover .text {
+        opacity: 1;
+        width: 70%;
+        transition-duration: .3s;
+        padding-right: 10px;
+    }
+    /* button click effect*/
+    .button-24:active {
+        transform: translate(2px ,2px);
+    }
+      .logo {
+        position: absolute;
+        top: -50px;
+        left: -70px;
+        width: 300px;
+        height: 300px;
+      }
+      
+      .movie-button {
+        background-color: #ffffff00;
+        color: #fff;
+        width: 8.5em;
+        height: 2.9em;
+        border: red 0.2em solid;
+        border-radius: 11px;
+        text-align: right;
+        transition: all 0.6s ease;
+      }
+      
+      .movie-button:hover {
+        background-color: red;
+        cursor: pointer;
+      }
+      
+      .movie-button svg {
+        width: 1.6em;
+        margin: -0.2em 0.8em 1em;
+        position: absolute;
+        display: flex;
+        transition: all 0.6s ease;
+      }
+      
+      .movie-button:hover svg {
+        transform: translateX(5px);
+      }
+      
+      .text {
+        margin: 0 1.5em
+      }
+  </style>
+
+
+
+</head>
+
+<body id="content" style="font-family: 'Noto Sans JP', sans-serif;">
+  <img src="{{ url_for('static', filename='movie_logo.png') }}" class="logo" alt="Movie Logo">
+
+  <button class="button-24" role="button" onclick="logout()">Logout</button>
+
+	<div class="ml-container" style="display: block;">
+		
+    <center><h1 style="font-family:Average">Movie Recommendation System</h1></center>
+    <div class="form-group shadow-textarea" style="margin-top: 30px;text-align: center;color: white;">
+        <input type="text" name="movie" class="movie form-control" id="autoComplete" autocomplete="off" placeholder="Enter the Movie Name" style="background-color: #ffffff;border-color:#ffffff;width: 60%;color: #181818" required="required" />
+        <br>
+    </div>
+
+    <div class="form-group" style="text-align: center;">
+      <button class="movie-button">
+
+  
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+      </svg>
+    
+      
+      <div class="text">
+        Enter
+      </div>
+    
+    </button>
+    </div>
+	</div>
+
+  <div id="loader" class="text-center">
+  </div>
+  
+  <div class="fail">
+    <center><h3>Sorry! The movie you requested is not in our database. 
+    Please check the spelling or try with other movies!</h3></center>
+  </div>
+
+	<div class="results">
+    <center>
+      <h2 id="name" class="text-uppercase"></h2>
+    </center>
+	</div>
+	
+
+  
+	<div class="footer" >
+    <p>&copy; 2024 Developed by Santu and Mihika</p>
+
+  </div>
+
+  <script>
+    function logout() {
+      // Assuming you're using JavaScript to redirect the user to the logout route
+      window.location.href = "{{ url_for('logout') }}";
+    }
+  </script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='autocomplete.js')}}"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='recommend.js')}}"></script>
+
+</body>
+</html>

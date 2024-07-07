@@ -35,7 +35,7 @@ python app.py
 SQLite database (Account.db) is used for user authentication. Tables are created automatically when the application starts if they do not exist.
 
 ##API Keys
-```bash
+
 Replace <your_api_key> in app.py with your actual TMDb API key.
 
 ## Usage
@@ -43,6 +43,7 @@ Replace <your_api_key> in app.py with your actual TMDb API key.
 **Log In**: Existing users can log in securely.
 **Home Page**: Browse movie suggestions and enter movie titles for recommendations.
 **Recommendation** Page: View details of selected movies, including trailers, reviews, and cast information.
+
 ## How It Works
 The application uses Flask as a web framework to handle user requests and render HTML templates. Here’s an overview of its functionality:
 

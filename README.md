@@ -27,7 +27,7 @@ pip install -r requirements.txt
 
 3.**Run the Application**
 
-```bash
+
 python app.py
 
 **The application will start running locally. Open your browser and go to http://localhost:5000 to view the application.**

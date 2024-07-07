@@ -24,7 +24,7 @@ Ensure you have Python 3.x and pip installed.
 ```bash
 
 pip install -r requirements.txt
-
+bash ```
 3.**Run the Application**
 
 
